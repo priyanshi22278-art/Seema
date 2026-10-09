@@ -1,0 +1,6 @@
+{
+  "name": "CampusPulse Event Portal",
+  "description": "Real-time university event management, student registration portal with Excel-style data grid, calendar sync, and AI event assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

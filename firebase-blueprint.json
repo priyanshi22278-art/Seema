@@ -1,0 +1,154 @@
+{
+  "entities": {
+    "Event": {
+      "title": "Event",
+      "description": "University event listing with capacity and venue details",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique Event ID (e.g. EVT-101)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the event"
+        },
+        "description": {
+          "type": "string",
+          "description": "Event detailed description"
+        },
+        "date": {
+          "type": "string",
+          "description": "Event date in YYYY-MM-DD"
+        },
+        "time": {
+          "type": "string",
+          "description": "Event start time (e.g. 14:00)"
+        },
+        "venue": {
+          "type": "string",
+          "description": "Location or auditorium for the event"
+        },
+        "maxCapacity": {
+          "type": "number",
+          "description": "Maximum number of allowed participants"
+        },
+        "currentRegistrations": {
+          "type": "number",
+          "description": "Current number of registered students"
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "User ID of event creator"
+        }
+      },
+      "required": ["id", "name", "description", "date", "time", "venue", "maxCapacity"]
+    },
+    "Registration": {
+      "title": "Registration",
+      "description": "Record of a student registration for a specific event",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique registration ID (e.g. REG-001)"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Assigned Student ID (e.g. STU-9482)"
+        },
+        "eventId": {
+          "type": "string",
+          "description": "ID of the registered event"
+        },
+        "eventName": {
+          "type": "string",
+          "description": "Name of the registered event"
+        },
+        "studentName": {
+          "type": "string",
+          "description": "Full name of the student"
+        },
+        "studentEmail": {
+          "type": "string",
+          "description": "Student email address"
+        },
+        "studentCourse": {
+          "type": "string",
+          "description": "Course or degree program of the student"
+        },
+        "userId": {
+          "type": "string",
+          "description": "Auth User ID of student"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["Pending", "Approved", "Rejected"],
+          "description": "Approval status of the registration"
+        },
+        "registrationDate": {
+          "type": "string",
+          "description": "ISO date string of registration timestamp"
+        }
+      },
+      "required": ["id", "studentId", "eventId", "studentName", "studentEmail", "studentCourse", "status"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Student or Admin user profile",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Unique user ID"
+        },
+        "username": {
+          "type": "string",
+          "description": "User login username"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["student", "admin"],
+          "description": "Role of the user"
+        },
+        "name": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "course": {
+          "type": "string",
+          "description": "Student course if applicable"
+        },
+        "studentId": {
+          "type": "string",
+          "description": "Unique generated student identification number"
+        }
+      },
+      "required": ["uid", "username", "role"]
+    }
+  },
+  "firestore": {
+    "/events/{eventId}": {
+      "schema": {
+        "$ref": "#/entities/Event"
+      },
+      "description": "Collection of university events"
+    },
+    "/registrations/{registrationId}": {
+      "schema": {
+        "$ref": "#/entities/Registration"
+      },
+      "description": "Collection of event registrations"
+    },
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/User"
+      },
+      "description": "User account profiles"
+    }
+  }
+}

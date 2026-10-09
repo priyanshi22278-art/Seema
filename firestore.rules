@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Events collection: accessible to all students and administrators
+    match /events/{eventId} {
+      allow read, write: if true;
+    }
+
+    // Registrations collection: allow read and write for real-time tracking
+    match /registrations/{registrationId} {
+      allow read, write: if true;
+    }
+
+    // Users profiles
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Admins collection
+    match /admins/{adminId} {
+      allow read, write: if true;
+    }
+
+    // Notifications collection: allow read and write
+    match /notifications/{notificationId} {
+      allow read, write: if true;
+    }
+
+    // Attendance records
+    match /attendance/{attendanceId} {
+      allow read, write: if true;
+    }
+
+    // Certificates records
+    match /certificates/{certificateId} {
+      allow read, write: if true;
+    }
+
+    // Test connection doc
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+  }
+}
